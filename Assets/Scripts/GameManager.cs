@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] float maxHorizontalRoom;
     [SerializeField] float minHorizontalRoom;
+    [SerializeField] float maxVerticalRoom;
+    [SerializeField] float minVerticalRoom;
 
     private void Awake()
     {
@@ -27,19 +29,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
 
-        if (currentRoom.transform.position.x > minHorizontalRoom && currentRoom.transform.position.x < maxHorizontalRoom)
-        {
-            movement.x = Input.GetAxisRaw("Horizontal");
-            movement.y = Input.GetAxisRaw("Vertical");
-        }
-        else
-        {
-            movement.x = 0;
-            movement.y = 0;
-            Input.ResetInputAxes();
-        }
+
+        //if (currentRoom.transform.position.x > minHorizontalRoom && currentRoom.transform.position.x < maxHorizontalRoom)
+        //{
+           
+        //}
+        //else
+        //{
+        //    movement.x = 0;
+        //    movement.y = 0;
+        //    Input.ResetInputAxes();
+        //}
 
 
 
@@ -47,9 +50,17 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rbRoom.MovePosition(rbRoom.position + movement * roomSpeed * Time.fixedDeltaTime);
-        //Mathf.Clamp(currentRoom.transform.position.x, minHorizontalRoom, maxHorizontalRoom);
+        ClampRoom();
+       
 
+    }
+
+    private void ClampRoom()
+    {
+        float clampedX = Mathf.Clamp(currentRoom.transform.position.x, minHorizontalRoom, maxHorizontalRoom);
+        float clampedY = Mathf.Clamp(currentRoom.transform.position.y, minVerticalRoom, maxVerticalRoom);
+        Vector2 clampedPosition = new Vector2(clampedX, clampedY);
+        rbRoom.MovePosition(clampedPosition + movement * roomSpeed * Time.fixedDeltaTime);
     }
 
 

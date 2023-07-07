@@ -724,6 +724,8 @@ MonoBehaviour:
   roomSpeed: 10
   maxHorizontalRoom: 3
   minHorizontalRoom: -3
+  maxVerticalRoom: 2
+  minVerticalRoom: -2
 --- !u!4 &1647082264
 Transform:
   m_ObjectHideFlags: 0
@@ -875,7 +877,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1997301803}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.6, y: -0.23, z: -0.015372522}
+  m_LocalPosition: {x: -0.6, y: 1.95, z: -0.015372522}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
