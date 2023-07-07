@@ -49,7 +49,6 @@ public class GameManager : MonoBehaviour
     {
         rbRoom.MovePosition(rbRoom.position + movement * roomSpeed * Time.fixedDeltaTime);
         //Mathf.Clamp(currentRoom.transform.position.x, minHorizontalRoom, maxHorizontalRoom);
-
     }
 
 

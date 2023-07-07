@@ -22,8 +22,8 @@ public class Movement : MonoBehaviour
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
         }
 
-
-
-
+        
     }
+
+    
 }
