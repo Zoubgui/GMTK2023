@@ -11,7 +11,8 @@ public class Movement : MonoBehaviour
     public float maxVelocity;
     void Start()
     {
-        rb.AddForce(Vector2.down * speed);
+        rb.AddForce(Vector2.down * speed/2);
+        rb.AddForce(Vector2.left * speed/3);
     }
 
     // Update is called once per frame
@@ -21,8 +22,6 @@ public class Movement : MonoBehaviour
         {
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
         }
-
-        
     }
 
     
