@@ -7,9 +7,11 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameObject currentRoom;
 
-    private Vector2 movement;
+    private Vector2 translationMovement;
+    private float rotationMovement = 0;
     public Rigidbody2D rbRoom;
-    [SerializeField] float roomSpeed;
+    [SerializeField] float roomTranslationSpeed;
+    [SerializeField] float roomRotationSpeed;
 
     [SerializeField] float maxHorizontalRoom;
     [SerializeField] float minHorizontalRoom;
@@ -29,39 +31,46 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        translationMovement.x = Input.GetAxisRaw("Horizontal");
+        translationMovement.y = Input.GetAxisRaw("Vertical");
 
-
-        //if (currentRoom.transform.position.x > minHorizontalRoom && currentRoom.transform.position.x < maxHorizontalRoom)
-        //{
-           
-        //}
-        //else
-        //{
-        //    movement.x = 0;
-        //    movement.y = 0;
-        //    Input.ResetInputAxes();
-        //}
-
-
+        ClampedRotationRoom();
 
     }
 
     private void FixedUpdate()
     {
-        ClampRoom();
-       
+
+        ClampedTranslationRoom();
+        
 
     }
 
-    private void ClampRoom()
+    private void ClampedTranslationRoom()
     {
         float clampedX = Mathf.Clamp(currentRoom.transform.position.x, minHorizontalRoom, maxHorizontalRoom);
         float clampedY = Mathf.Clamp(currentRoom.transform.position.y, minVerticalRoom, maxVerticalRoom);
         Vector2 clampedPosition = new Vector2(clampedX, clampedY);
-        rbRoom.MovePosition(clampedPosition + movement * roomSpeed * Time.fixedDeltaTime);
+        rbRoom.MovePosition(clampedPosition + translationMovement * roomTranslationSpeed * Time.fixedDeltaTime);
+    }
+
+    private void ClampedRotationRoom()
+    {
+        if (Input.GetKey(KeyCode.A))
+        {
+            rotationMovement += roomRotationSpeed * Time.fixedDeltaTime;
+            Debug.Log("tourne à droite");
+        }
+        if(Input.GetKey(KeyCode.E))
+        {
+            rotationMovement -= roomRotationSpeed * Time.fixedDeltaTime;
+            Debug.Log("tourne à gauche");
+        }
+
+        rbRoom.MoveRotation(rotationMovement);
+        Debug.Log(rotationMovement);
+
     }
 
 
-}
+    }
