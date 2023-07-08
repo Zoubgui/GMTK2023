@@ -68,7 +68,6 @@ public class GameManager : MonoBehaviour
         }
 
         rbRoom.MoveRotation(rotationMovement);
-        Debug.Log(rotationMovement);
 
     }
 
