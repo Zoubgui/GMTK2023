@@ -11,6 +11,8 @@ public class Ennemy : MonoBehaviour
 
     public GameObject fx_hit;
 
+    public Animator animator;
+
 
     private void Start()
     {
@@ -23,12 +25,14 @@ public class Ennemy : MonoBehaviour
 
         if (currentLife <= 0)
             Die();
+        else
+            animator.SetTrigger("hurt");
     }
 
     public void Die()
     {
-        //TODO Animator + sound;
-        Destroy(this.gameObject);
+        animator.SetTrigger("die");
+        //Destroy(this.gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

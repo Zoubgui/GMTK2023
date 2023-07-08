@@ -72,7 +72,7 @@ public class Movement : MonoBehaviour
         if (collision.collider.tag == "Ennemy")
         {
             ennemiSoundEffect.Play();
-            PlayerTakeDammage();
+            collision.gameObject.GetComponent<Ennemy>().TakeDamage(1);
         }
     }
 

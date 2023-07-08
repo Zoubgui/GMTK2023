@@ -448,6 +448,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1808596401}
     m_Modifications:
+    - target: {fileID: 7511315670589195717, guid: e19e8bd64da78d747b168773a36b4ef8, type: 3}
+      propertyPath: maxLife
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7511315670589195718, guid: e19e8bd64da78d747b168773a36b4ef8, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -647,7 +651,7 @@ PrefabInstance:
       objectReference: {fileID: 1808596398}
     - target: {fileID: 4721348003464619740, guid: 057bd7a7d2b89e04da3949d624a429cc, type: 3}
       propertyPath: healthPoint
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4721348003464619740, guid: 057bd7a7d2b89e04da3949d624a429cc, type: 3}
       propertyPath: maxVerticalRoom
