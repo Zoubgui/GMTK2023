@@ -8,12 +8,14 @@ public class Movement : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     public float maxVelocity;
     
-
     public SpriteRenderer sprite;
 
     AudioSource wallSoundEffect;
     AudioSource trapSoundEffect;
     AudioSource ennemiSoundEffect;
+
+    public GameObject fxWall;
+    public GameObject fxMort;
 
     void Start()
     {
@@ -49,34 +51,46 @@ public class Movement : MonoBehaviour
         {
             sprite.flipX = true;
         }
-
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Pico"))
+        if (collision.CompareTag("Pico"))
         {
-            GameManager.instance.PlayerTakeDammage();
+            PlayerTakeDammage();
             trapSoundEffect.Play();
         }
-
-
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Wall")
         {
             wallSoundEffect.Play();
+            Instantiate(fxWall, transform.position, Quaternion.identity);
         }
 
         if (collision.collider.tag == "Ennemy")
         {
             ennemiSoundEffect.Play();
+            PlayerTakeDammage();
         }
-
-
     }
 
-    
+    public void PlayerTakeDammage()
+    {
+        GameManager.instance.healthPoint -= 1;
+        Destroy(GameManager.instance.healthBar.transform.GetChild(GameManager.instance.healthPoint).gameObject);
+
+        if (GameManager.instance.healthPoint <= 0)
+        {
+            GameObject _fxMort = Instantiate(fxMort, transform.position, Quaternion.identity);
+            _fxMort.transform.parent = transform;
+            rb.Sleep();
+            GetComponent<Collider2D>().enabled = false;
+            sprite.enabled = false;
+        }
+    }
+
+
+
 }
