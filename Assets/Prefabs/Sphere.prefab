@@ -544,6 +544,7 @@ MonoBehaviour:
   rb: {fileID: 5855299182504712131}
   maxVelocity: 10
   sprite: {fileID: 286407760}
+  animator: {fileID: 8587843489923200941}
   fxWall: {fileID: 4929733438063994361, guid: f5557c00a24d3644daa5a290964db88a, type: 3}
   fxMort: {fileID: 9009754804286555667, guid: 91b4692242ee9774088d259d53fc3176, type: 3}
 --- !u!50 &5855299182504712131

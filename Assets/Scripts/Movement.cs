@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour
     public float maxVelocity;
     
     public SpriteRenderer sprite;
+    public Animator animator;
 
     AudioSource wallSoundEffect;
     AudioSource trapSoundEffect;
@@ -27,7 +28,9 @@ public class Movement : MonoBehaviour
         trapSoundEffect = transform.GetChild(2).GetComponent<AudioSource>();
         ennemiSoundEffect = transform.GetChild(3).GetComponent<AudioSource>();
 
+        animator.SetTrigger("start");
 
+        
     }
 
     // Update is called once per frame
@@ -36,7 +39,11 @@ public class Movement : MonoBehaviour
         if (rb.velocity.magnitude > maxVelocity)
         {
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
+
+            
         }
+
+        
 
         //Debug.Log(rb.velocity);
 
@@ -67,6 +74,9 @@ public class Movement : MonoBehaviour
         {
             wallSoundEffect.Play();
             Instantiate(fxWall, transform.position, Quaternion.identity);
+
+            StartCoroutine(BoostVelocity(3));
+            rb.AddForce(rb.velocity*50);
         }
 
         if (collision.collider.tag == "Ennemy")
@@ -89,6 +99,13 @@ public class Movement : MonoBehaviour
             GetComponent<Collider2D>().enabled = false;
             sprite.enabled = false;
         }
+    }
+
+    public IEnumerator BoostVelocity(int i)
+    {
+        maxVelocity += i;
+        yield return new WaitForSeconds(0.2f);
+        maxVelocity -= i;
     }
 
 
