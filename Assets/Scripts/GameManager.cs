@@ -56,20 +56,19 @@ public class GameManager : MonoBehaviour
 
     private void ClampedRotationRoom()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             rotationMovement += roomRotationSpeed * Time.fixedDeltaTime;
-            Debug.Log("tourne à droite");
+            
         }
-        if(Input.GetKey(KeyCode.E))
+        if(Input.GetKey(KeyCode.RightArrow))
         {
             rotationMovement -= roomRotationSpeed * Time.fixedDeltaTime;
-            Debug.Log("tourne à gauche");
+         
         }
 
         rbRoom.MoveRotation(rotationMovement);
 
     }
-
 
     }
