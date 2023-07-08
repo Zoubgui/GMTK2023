@@ -49,6 +49,7 @@ MonoBehaviour:
   maxLife: 10
   currentLife: 0
   spriteRenderer: {fileID: 7511315671291125134}
+  fx_hit: {fileID: 4099317107415519473, guid: 8d1c2dfd601fecd4caa55110d4a42c92, type: 3}
 --- !u!58 &7511315670589195716
 CircleCollider2D:
   m_ObjectHideFlags: 0
