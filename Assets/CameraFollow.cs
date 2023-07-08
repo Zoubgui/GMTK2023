@@ -20,10 +20,17 @@ public class CameraFollow : MonoBehaviour
 
         //Debug.Log(GameManager.instance.currentRoom.transform.rotation.z);
 
-        Debug.Log(GameManager.instance.currentRoom.transform.rotation.eulerAngles); // en 0 ->  360
+        float a = GameManager.instance.currentRoom.transform.rotation.eulerAngles.z;
+        float b = a / 360;
+        float c = Mathf.Cos(b * 2 *Mathf.PI);
+        float d = c * 3.15f;
 
-        float f = GameManager.instance.currentRoom.transform.rotation.z * 3.15f;
-        posOffSet.y = f;
+        Debug.Log(d);
+
+
+
+
+        posOffSet.y = d;
         transform.position = Vector3.SmoothDamp(transform.position, gameBoy.transform.position + posOffSet, ref velocity, timeOffset);
     }
 }
