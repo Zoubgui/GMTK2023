@@ -848,12 +848,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentRoom: {fileID: 1997301803}
   rbRoom: {fileID: 1997301805}
-  roomTranslationSpeed: 0
-  roomRotationSpeed: 0
-  maxHorizontalRoom: 10
-  minHorizontalRoom: -10
-  maxVerticalRoom: 0
-  minVerticalRoom: 0
+  roomTranslationSpeed: 10
+  roomRotationSpeed: 10
+  maxHorizontalRoom: 3
+  minHorizontalRoom: -3
+  maxVerticalRoom: 2
+  minVerticalRoom: -2
 --- !u!4 &1647082264
 Transform:
   m_ObjectHideFlags: 0
