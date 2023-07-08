@@ -9,6 +9,9 @@ public class Ennemy : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
 
+    public GameObject fx_hit;
+
+
     private void Start()
     {
         currentLife = maxLife;
@@ -38,9 +41,11 @@ public class Ennemy : MonoBehaviour
     }
     
 
-    //TMP
+    
     public IEnumerator DamageFx()
     {
+        Instantiate(fx_hit, transform.position, Quaternion.identity);
+
         float strob = 0.1f;
         yield return new WaitForSeconds(strob);
         spriteRenderer.color = new Color(255, 255, 0);
