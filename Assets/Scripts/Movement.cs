@@ -10,6 +10,10 @@ public class Movement : MonoBehaviour
     
     public SpriteRenderer sprite;
 
+    AudioSource wallSoundEffect;
+    AudioSource trapSoundEffect;
+    AudioSource ennemiSoundEffect;
+
     public GameObject fxWall;
     public GameObject fxMort;
 
@@ -17,6 +21,13 @@ public class Movement : MonoBehaviour
     {
         rb.AddForce(Vector2.down * speed/2);
         rb.AddForce(Vector2.left * speed/3);
+
+        wallSoundEffect = transform.GetChild(1).GetComponent<AudioSource>();
+        Debug.Log(wallSoundEffect);
+        trapSoundEffect = transform.GetChild(2).GetComponent<AudioSource>();
+        ennemiSoundEffect = transform.GetChild(3).GetComponent<AudioSource>();
+
+
     }
 
     // Update is called once per frame
@@ -51,6 +62,25 @@ public class Movement : MonoBehaviour
     {
         if(collision.CompareTag("Pico"))
         {
+            GameManager.instance.PlayerTakeDammage();
+            trapSoundEffect.Play();
+        }
+
+
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Wall")
+        {
+            wallSoundEffect.Play();
+        }
+
+        if (collision.collider.tag == "Ennemy")
+        {
+            ennemiSoundEffect.Play();
+        }
+
+
             PlayerTakeDammage();
         }
     }
