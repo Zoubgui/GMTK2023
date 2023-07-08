@@ -11,13 +11,14 @@ public class GameManager : MonoBehaviour
     private Vector2 translationMovement;
     private float rotationMovement = 0;
     public Rigidbody2D rbRoom;
-    [SerializeField] float roomTranslationSpeed;
-    [SerializeField] float roomRotationSpeed;
+    private float roomTranslationSpeed = 2.5f;
+    private float roomRotationSpeed = 5f ;
 
-    [SerializeField] float maxHorizontalRoom;
-    [SerializeField] float minHorizontalRoom;
-    [SerializeField] float maxVerticalRoom;
-    [SerializeField] float minVerticalRoom;
+    private float maxHorizontalRoom = 100;
+    private float minHorizontalRoom = -100;
+    private float maxVerticalRoom = 100;
+    private float minVerticalRoom = -100;
+
     public int healthPoint = 5;
 
     public GameObject healthBar;
