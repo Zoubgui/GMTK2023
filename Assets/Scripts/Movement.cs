@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     public float maxVelocity;
 
-    public Transform sprite;
+    public SpriteRenderer sprite;
 
     void Start()
     {
@@ -31,11 +31,11 @@ public class Movement : MonoBehaviour
 
         if (rb.velocity.x >= 0)
         {
-            //sprite.flipX = false;
+            sprite.flipX = false;
         }
         else
         {
-            //sprite.flipX = true;
+            sprite.flipX = true;
         }
 
 

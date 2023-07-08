@@ -242,7 +242,7 @@ MonoBehaviour:
   speed: 100
   rb: {fileID: 5855299182504712131}
   maxVelocity: 10
-  sprite: {fileID: 286407759}
+  sprite: {fileID: 286407760}
 --- !u!50 &5855299182504712131
 Rigidbody2D:
   serializedVersion: 4
