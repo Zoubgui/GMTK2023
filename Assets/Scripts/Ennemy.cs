@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Ennemy : MonoBehaviour
 {
-    public float maxLife;
+
+    private float maxLife = 3;
     public float currentLife;
 
     public SpriteRenderer spriteRenderer;
