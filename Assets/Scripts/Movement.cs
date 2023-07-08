@@ -8,8 +8,10 @@ public class Movement : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     public float maxVelocity;
     
-
     public SpriteRenderer sprite;
+
+    public GameObject fxWall;
+    public GameObject fxMort;
 
     void Start()
     {
@@ -38,18 +40,34 @@ public class Movement : MonoBehaviour
         {
             sprite.flipX = true;
         }
+    }
 
-
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Instantiate(fxWall, transform.position, Quaternion.identity);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Pico"))
         {
-            GameManager.instance.PlayerTakeDammage();
+            PlayerTakeDammage();
         }
-        
     }
 
-    
+    public void PlayerTakeDammage()
+    {
+        GameManager.instance.healthPoint -= 1;
+        Destroy(GameManager.instance.healthBar.transform.GetChild(GameManager.instance.healthPoint).gameObject);
+
+        if(GameManager.instance.healthPoint <= 0)
+        {
+            GameObject _fxMort = Instantiate(fxMort, transform.position, Quaternion.identity);
+            _fxMort.transform.parent = transform;
+            rb.Sleep();
+            GetComponent<Collider2D>().enabled = false;
+            sprite.enabled = false;
+        }
+    }
+
 }

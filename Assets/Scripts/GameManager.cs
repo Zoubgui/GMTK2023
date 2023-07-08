@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float minVerticalRoom;
     public int healthPoint = 5;
 
-    [SerializeField] GameObject healthBar; 
+    public GameObject healthBar;
 
 
     private void Awake()
@@ -80,13 +80,7 @@ public class GameManager : MonoBehaviour
             
     }
 
-    public void PlayerTakeDammage()
-    {
-        healthPoint -= 1;
 
-        Destroy(healthBar.transform.GetChild(healthPoint).gameObject);
-
-    }
     
 
 }
