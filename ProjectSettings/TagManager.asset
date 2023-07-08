@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ennemy
   - Balle
+  - Pico
   layers:
   - Default
   - TransparentFX

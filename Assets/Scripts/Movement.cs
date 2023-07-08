@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     public float maxVelocity;
 
-    public Transform sprite;
+    public SpriteRenderer sprite;
 
     void Start()
     {
@@ -24,22 +24,29 @@ public class Movement : MonoBehaviour
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
         }
 
-        //Debug.Log(rb.velocity);
 
         Vector2 v2 = rb.velocity.normalized;
         float f = Vector2.Angle(Vector2.right, v2);
-        //Vector2.Angle(Vector2.right, v2);
-        //Debug.Log(Vector2.Angle(Vector2.right, v2));
-        //sprite.eulerAngles.Set(0,0, Vector2.Angle(Vector2.right, v2));
 
-        //sprite.Rotate(0, 0, Vector2.Angle(Vector2.right, v2));
-        //sprite.transform.rotation.Set(0,0,f,1);
+        if (rb.velocity.x >= 0)
+        {
+            sprite.flipX = false;
+        }
+        else
+        {
+            sprite.flipX = true;
+        }
 
-        //sprite.rotation.SetEulerAngles(0f, 0f, f);
-        Debug.Log(f);
-        //sprite.localRotation.Set(0, 0, f, 1);
-        sprite.rotation.Set(0, 0, f, 1);
     }
 
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Pico"))
+        {
+            Destroy(this.gameObject);
+        }
+        
+    }
+
+
 }
