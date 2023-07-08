@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float maxVerticalRoom;
     [SerializeField] float minVerticalRoom;
 
+
     private void Awake()
     {
         instance = this;
@@ -25,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
@@ -35,7 +37,7 @@ public class GameManager : MonoBehaviour
         translationMovement.y = Input.GetAxisRaw("Vertical");
 
         ClampedRotationRoom();
-
+      
     }
 
     private void FixedUpdate()
@@ -67,8 +69,15 @@ public class GameManager : MonoBehaviour
          
         }
 
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
         rbRoom.MoveRotation(rotationMovement);
-
+            
     }
 
-    }
+    
+
+}
