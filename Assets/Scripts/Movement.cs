@@ -37,6 +37,13 @@ public class Movement : MonoBehaviour
             sprite.flipX = true;
         }
 
+<<<<<<< Updated upstream
+=======
+        //sprite.rotation.SetEulerAngles(0f, 0f, f);
+        //Debug.Log(f);
+        //sprite.localRotation.Set(0, 0, f, 1);
+        sprite.rotation.Set(0, 0, f, 1);
+>>>>>>> Stashed changes
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
