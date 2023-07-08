@@ -1242,7 +1242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4721348003464619740, guid: 057bd7a7d2b89e04da3949d624a429cc, type: 3}
       propertyPath: roomRotationSpeed
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4721348003464619740, guid: 057bd7a7d2b89e04da3949d624a429cc, type: 3}
       propertyPath: roomTranslationSpeed
