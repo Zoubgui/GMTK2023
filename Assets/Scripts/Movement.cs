@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] Rigidbody2D rb;
     public float maxVelocity;
+    
 
     public SpriteRenderer sprite;
 
@@ -45,7 +46,7 @@ public class Movement : MonoBehaviour
     {
         if(collision.CompareTag("Pico"))
         {
-            Destroy(this.gameObject);
+            GameManager.instance.PlayerTakeDammage();
         }
         
     }

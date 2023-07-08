@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] float minHorizontalRoom;
     [SerializeField] float maxVerticalRoom;
     [SerializeField] float minVerticalRoom;
+    public int healthPoint = 5;
+
+    [SerializeField] GameObject healthBar; 
 
 
     private void Awake()
@@ -45,7 +48,6 @@ public class GameManager : MonoBehaviour
 
         ClampedTranslationRoom();
         
-
     }
 
     private void ClampedTranslationRoom()
@@ -78,6 +80,13 @@ public class GameManager : MonoBehaviour
             
     }
 
+    public void PlayerTakeDammage()
+    {
+        healthPoint -= 1;
+
+        Destroy(healthBar.transform.GetChild(healthPoint).gameObject);
+
+    }
     
 
 }
