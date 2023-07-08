@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     public float maxVelocity;
 
-    public SpriteRenderer sprite;
+    public Transform sprite;
 
     void Start()
     {
@@ -24,26 +24,21 @@ public class Movement : MonoBehaviour
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
         }
 
+        //Debug.Log(rb.velocity);
 
         Vector2 v2 = rb.velocity.normalized;
         float f = Vector2.Angle(Vector2.right, v2);
 
         if (rb.velocity.x >= 0)
         {
-            sprite.flipX = false;
+            //sprite.flipX = false;
         }
         else
         {
-            sprite.flipX = true;
+            //sprite.flipX = true;
         }
 
-<<<<<<< Updated upstream
-=======
-        //sprite.rotation.SetEulerAngles(0f, 0f, f);
-        //Debug.Log(f);
-        //sprite.localRotation.Set(0, 0, f, 1);
-        sprite.rotation.Set(0, 0, f, 1);
->>>>>>> Stashed changes
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -55,5 +50,5 @@ public class Movement : MonoBehaviour
         
     }
 
-
+    
 }
