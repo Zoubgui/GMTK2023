@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7511315670589195718}
   - component: {fileID: 7511315670589195717}
-  - component: {fileID: 7511315670589195716}
+  - component: {fileID: 9153213067794306688}
   m_Layer: 0
   m_Name: Ennemy
   m_TagString: Ennemy
@@ -157,8 +157,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   fx_hit: {fileID: 4099317107415519473, guid: 8d1c2dfd601fecd4caa55110d4a42c92, type: 3}
   animator: {fileID: 6282015319037431759}
---- !u!58 &7511315670589195716
-CircleCollider2D:
+--- !u!60 &9153213067794306688
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -171,5 +171,19 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.27
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.020224392, y: 0.62714946}
+      - {x: -0.5205027, y: 0.45534927}
+      - {x: -0.50273967, y: -0.5925375}
+      - {x: 0.47954556, y: -0.49976042}
+      - {x: 0.4568596, y: 0.5106475}

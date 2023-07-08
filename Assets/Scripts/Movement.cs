@@ -20,8 +20,7 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
-        rb.AddForce(Vector2.down * speed/2);
-        rb.AddForce(Vector2.left * speed/3);
+        rb.AddForce(GameManager.instance.currentRoom.GetComponent<Room>().pulse * speed);
 
         wallSoundEffect = transform.GetChild(1).GetComponent<AudioSource>();
         Debug.Log(wallSoundEffect);
