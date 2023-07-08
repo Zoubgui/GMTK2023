@@ -53,34 +53,25 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Instantiate(fxWall, transform.position, Quaternion.identity);
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Pico"))
+        if (collision.CompareTag("Pico"))
         {
-            GameManager.instance.PlayerTakeDammage();
+            PlayerTakeDammage();
             trapSoundEffect.Play();
         }
-
-
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Wall")
         {
             wallSoundEffect.Play();
+            Instantiate(fxWall, transform.position, Quaternion.identity);
         }
 
         if (collision.collider.tag == "Ennemy")
         {
             ennemiSoundEffect.Play();
-        }
-
-
             PlayerTakeDammage();
         }
     }
@@ -90,7 +81,7 @@ public class Movement : MonoBehaviour
         GameManager.instance.healthPoint -= 1;
         Destroy(GameManager.instance.healthBar.transform.GetChild(GameManager.instance.healthPoint).gameObject);
 
-        if(GameManager.instance.healthPoint <= 0)
+        if (GameManager.instance.healthPoint <= 0)
         {
             GameObject _fxMort = Instantiate(fxMort, transform.position, Quaternion.identity);
             _fxMort.transform.parent = transform;
@@ -99,5 +90,7 @@ public class Movement : MonoBehaviour
             sprite.enabled = false;
         }
     }
+
+
 
 }
