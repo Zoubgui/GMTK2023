@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     private float rotationMovement = 0;
     public Rigidbody2D rbRoom;
     private float roomTranslationSpeed = 2.5f;
-    private float roomRotationSpeed = 5f ;
+    private float roomRotationSpeed = 50f ;
 
     public int healthPoint = 4;
 
@@ -23,7 +23,10 @@ public class GameManager : MonoBehaviour
     private float maxVerticalRoom = 100;
     private float minVerticalRoom = -100;
 
+    public bool blockInput;
     public Animator greySquare;
+
+
 
 
     private void Awake()
@@ -31,27 +34,23 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    void Start()
+    private void Start()
     {
         greySquare = GameObject.Find("GreySquare").GetComponent<Animator>();
        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        translationMovement.x = Input.GetAxisRaw("Horizontal");
-        translationMovement.y = Input.GetAxisRaw("Vertical");
-
-        ClampedRotationRoom();
-      
-    }
-
     private void FixedUpdate()
     {
 
-        ClampedTranslationRoom();
-        
+        translationMovement.x = Input.GetAxisRaw("Horizontal");
+        translationMovement.y = Input.GetAxisRaw("Vertical");
+
+        if (blockInput == false)
+            ClampedTranslationRoom();
+
+        if (blockInput == false)
+            ClampedRotationRoom();
     }
 
     private void ClampedTranslationRoom()
@@ -73,9 +72,12 @@ public class GameManager : MonoBehaviour
         if(Input.GetKey(KeyCode.RightArrow))
         {
             rotationMovement -= roomRotationSpeed * Time.fixedDeltaTime;
-         
+
+       
+            
         }
 
+        
         if(Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);

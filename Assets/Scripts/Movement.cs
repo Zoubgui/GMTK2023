@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
-    private float speed =50f;
+    private float speed =75f;
     [SerializeField] Rigidbody2D rb;
-    private float maxVelocity =3f;
+    private float maxVelocity =4f;
     
     public SpriteRenderer sprite;
     public Animator animator;
@@ -30,7 +31,6 @@ public class Movement : MonoBehaviour
 
         animator.SetTrigger("start");
 
-        
     }
 
     // Update is called once per frame
@@ -109,7 +109,12 @@ public class Movement : MonoBehaviour
             GetComponent<Collider2D>().enabled = false;
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             transform.parent = GameManager.instance.currentRoom.transform;
-            animator.SetTrigger("die");  
+            animator.SetTrigger("die");
+
+            GameManager.instance.blockInput = true;
+            StartCoroutine(ReLoadScene());
+
+
         }
     }
 
@@ -137,6 +142,12 @@ public class Movement : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         
+    }
+
+    public IEnumerator ReLoadScene()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }
