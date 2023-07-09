@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] float speed;
+    private float speed =50f;
     [SerializeField] Rigidbody2D rb;
-    public float maxVelocity;
+    private float maxVelocity =3f;
     
     public SpriteRenderer sprite;
     public Animator animator;
@@ -16,6 +16,8 @@ public class Movement : MonoBehaviour
     AudioSource ennemiSoundEffect;
 
     public GameObject fxWall;
+
+    public bool damageTaken = false;
 
     void Start()
     {
@@ -63,7 +65,6 @@ public class Movement : MonoBehaviour
         if (collision.CompareTag("Pico"))
         {
             PlayerTakeDammage();
-            trapSoundEffect.Play();
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -91,8 +92,16 @@ public class Movement : MonoBehaviour
 
     public void PlayerTakeDammage()
     {
-        GameManager.instance.healthPoint -= 1;
-        Destroy(GameManager.instance.healthBar.transform.GetChild(GameManager.instance.healthPoint).gameObject);
+        if (damageTaken == false)
+        {
+            GameManager.instance.healthPoint -= 1;
+            Destroy(GameManager.instance.healthBar.transform.GetChild(GameManager.instance.healthPoint).gameObject);
+            trapSoundEffect.Play();
+            StartCoroutine(DammageTaken());
+            StartCoroutine(DammageBlink());
+
+
+        }
         
         if (GameManager.instance.healthPoint <= 0)
         {
@@ -100,9 +109,7 @@ public class Movement : MonoBehaviour
             GetComponent<Collider2D>().enabled = false;
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             transform.parent = GameManager.instance.currentRoom.transform;
-            animator.SetTrigger("die");
-            
-            
+            animator.SetTrigger("die");  
         }
     }
 
@@ -113,6 +120,23 @@ public class Movement : MonoBehaviour
         maxVelocity -= i;
     }
 
+   public IEnumerator DammageTaken()
+    {
+        damageTaken = true;
+        yield return new WaitForSeconds(0.6f);
+        damageTaken = false;
+    }
 
+    public IEnumerator DammageBlink()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            sprite.enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            sprite.enabled = true;
+            yield return new WaitForSeconds(0.1f);
+        }
+        
+    }
 
 }

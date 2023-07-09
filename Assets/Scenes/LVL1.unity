@@ -1349,6 +1349,7 @@ GameObject:
   - component: {fileID: 920171265}
   - component: {fileID: 920171264}
   - component: {fileID: 920171263}
+  - component: {fileID: 920171266}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1422,6 +1423,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &920171266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920171262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 830d6a407daf1cf4ea22a96b9d1f4ad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameBoy: {fileID: 0}
 --- !u!1 &947445927
 GameObject:
   m_ObjectHideFlags: 0
@@ -1629,8 +1643,12 @@ PrefabInstance:
       value: Sphere
       objectReference: {fileID: 0}
     - target: {fileID: 5855299182504712128, guid: 38fb6aecb7a463346be723659eb67293, type: 3}
+      propertyPath: speed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5855299182504712128, guid: 38fb6aecb7a463346be723659eb67293, type: 3}
       propertyPath: maxVelocity
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5855299182504712129, guid: 38fb6aecb7a463346be723659eb67293, type: 3}
       propertyPath: m_RootOrder

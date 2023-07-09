@@ -5,8 +5,8 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public GameObject gameBoy;
-    public float timeOffset;
-    public Vector3 posOffSet;
+    private float timeOffset = 0.7f;
+    private Vector3 posOffSet = new Vector3(0,0,-10f);
     private Vector3 velocity;
 
     private void Start()
