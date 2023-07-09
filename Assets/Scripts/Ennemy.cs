@@ -33,7 +33,7 @@ public class Ennemy : MonoBehaviour
     public void Die()
     {
         animator.SetTrigger("die");
-        //Destroy(this.gameObject);
+        GetComponent<Collider2D>().enabled = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

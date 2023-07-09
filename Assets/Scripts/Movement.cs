@@ -16,7 +16,6 @@ public class Movement : MonoBehaviour
     AudioSource ennemiSoundEffect;
 
     public GameObject fxWall;
-    public GameObject fxMort;
 
     void Start()
     {
@@ -78,6 +77,11 @@ public class Movement : MonoBehaviour
             rb.AddForce(rb.velocity*50);
         }
 
+        if (collision.collider.tag == "Bord")
+        {
+            //wallSoundEffect.Play();
+        }
+
         if (collision.collider.tag == "Ennemy")
         {
             ennemiSoundEffect.Play();
@@ -89,14 +93,16 @@ public class Movement : MonoBehaviour
     {
         GameManager.instance.healthPoint -= 1;
         Destroy(GameManager.instance.healthBar.transform.GetChild(GameManager.instance.healthPoint).gameObject);
-
+        
         if (GameManager.instance.healthPoint <= 0)
         {
-            GameObject _fxMort = Instantiate(fxMort, transform.position, Quaternion.identity);
-            _fxMort.transform.parent = transform;
             rb.Sleep();
             GetComponent<Collider2D>().enabled = false;
-            sprite.enabled = false;
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            transform.parent = GameManager.instance.currentRoom.transform;
+            animator.SetTrigger("die");
+            
+            
         }
     }
 

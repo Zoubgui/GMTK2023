@@ -14,14 +14,14 @@ public class GameManager : MonoBehaviour
     private float roomTranslationSpeed = 2.5f;
     private float roomRotationSpeed = 5f ;
 
+    public int healthPoint = 5;
+
+    public GameObject healthBar;
+
     private float maxHorizontalRoom = 100;
     private float minHorizontalRoom = -100;
     private float maxVerticalRoom = 100;
     private float minVerticalRoom = -100;
-
-    public int healthPoint = 5;
-
-    public GameObject healthBar;
 
 
     private void Awake()
@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
         float clampedY = Mathf.Clamp(currentRoom.transform.position.y, minVerticalRoom, maxVerticalRoom);
         Vector2 clampedPosition = new Vector2(clampedX, clampedY);
         rbRoom.MovePosition(clampedPosition + translationMovement * roomTranslationSpeed * Time.fixedDeltaTime);
+        
     }
 
     private void ClampedRotationRoom()

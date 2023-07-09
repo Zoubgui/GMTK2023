@@ -8,11 +8,12 @@ TagManager:
   - Balle
   - Pico
   - Wall
+  - Bord
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ecran
   - Water
   - UI
   - 

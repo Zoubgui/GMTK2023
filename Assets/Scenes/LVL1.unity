@@ -1230,7 +1230,7 @@ PrefabInstance:
       objectReference: {fileID: 1808596398}
     - target: {fileID: 4721348003464619740, guid: 057bd7a7d2b89e04da3949d624a429cc, type: 3}
       propertyPath: healthPoint
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4721348003464619740, guid: 057bd7a7d2b89e04da3949d624a429cc, type: 3}
       propertyPath: maxVerticalRoom
