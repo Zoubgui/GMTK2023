@@ -20,16 +20,20 @@ public class Movement : MonoBehaviour
 
     public bool damageTaken = false;
 
+    
+
     void Start()
     {
-        rb.AddForce(GameManager.instance.currentRoom.GetComponent<Room>().pulse * speed);
+       
 
+        StartCoroutine(WaitidleState(GameManager.instance.idleWait));
+     
         wallSoundEffect = transform.GetChild(1).GetComponent<AudioSource>();
         Debug.Log(wallSoundEffect);
         trapSoundEffect = transform.GetChild(2).GetComponent<AudioSource>();
         ennemiSoundEffect = transform.GetChild(3).GetComponent<AudioSource>();
 
-        animator.SetTrigger("start");
+       
 
     }
 
@@ -39,8 +43,7 @@ public class Movement : MonoBehaviour
         if (rb.velocity.magnitude > maxVelocity)
         {
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
-
-            
+ 
         }
 
         
@@ -69,7 +72,7 @@ public class Movement : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Wall")
+        if (collision.collider.tag == "Wall" && GameManager.instance.ennemyDied == false)
         {
             wallSoundEffect.Play();
             Instantiate(fxWall, transform.position, Quaternion.identity);
@@ -152,4 +155,11 @@ public class Movement : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    IEnumerator WaitidleState(float i)
+    {
+        yield return new WaitForSeconds(i);
+        rb.AddForce(GameManager.instance.currentRoom.GetComponent<Room>().pulse * speed);
+        animator.SetTrigger("start");
+
+    }
 }
