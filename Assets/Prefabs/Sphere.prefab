@@ -148,9 +148,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5f9deb3a79d4d0f4e9b4e7f8094e53ae, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6fdc0f79fc7c0d445a446f6b22015551, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -276,7 +276,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5adc8f59af32e824f9090dbef19d8ae3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: bd35c7b55c2c8ac4ca85d018233ebd21, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -404,7 +404,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ec7d70782f4425041abdc0b42ee6d525, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 89ac6145f1a449a409287dc549378062, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.513
   m_Pitch: 1
@@ -540,13 +540,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d1c890f2b82ba4438b2d80332fdd9ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
   rb: {fileID: 5855299182504712131}
-  maxVelocity: 10
   sprite: {fileID: 286407760}
   animator: {fileID: 8587843489923200941}
   fxWall: {fileID: 4929733438063994361, guid: f5557c00a24d3644daa5a290964db88a, type: 3}
-  fxMort: {fileID: 9009754804286555667, guid: 91b4692242ee9774088d259d53fc3176, type: 3}
+  damageTaken: 0
 --- !u!50 &5855299182504712131
 Rigidbody2D:
   serializedVersion: 4

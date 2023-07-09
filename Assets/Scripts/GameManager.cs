@@ -41,7 +41,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         greySquare = GameObject.Find("GreySquare").GetComponent<Animator>();
-        
+
+   
 
     }
 
