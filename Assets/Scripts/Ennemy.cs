@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 public class Ennemy : MonoBehaviour
 {
 
@@ -14,18 +16,23 @@ public class Ennemy : MonoBehaviour
 
     public Animator animator;
 
+    int sceneActuelleIndex;
 
     private void Start()
     {
         currentLife = maxLife;
+        sceneActuelleIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
-    public void TakeDamage(float d)
+    public void TakeDamage(float d, GameObject collision)
     {
         currentLife -= d;
 
         if (currentLife <= 0)
+        {
+            collision.GetComponent<Movement>().damageTaken = true;
             Die();
+        }
         else
             animator.SetTrigger("hurt");
     }
@@ -34,18 +41,25 @@ public class Ennemy : MonoBehaviour
     {
         animator.SetTrigger("die");
         GetComponent<Collider2D>().enabled = false;
+        StartCoroutine(LoadNewScene());
+
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Balle"))
         {
-            TakeDamage(1);
-            StartCoroutine(DamageFx());
+            TakeDamage(1, collision.gameObject);
+            //StartCoroutine(DamageFx());
         }
     }
     
-
+    public IEnumerator LoadNewScene()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(sceneActuelleIndex + 1);
+    }
     
     public IEnumerator DamageFx()
     {
