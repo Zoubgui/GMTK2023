@@ -17,9 +17,11 @@ public class IntroScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.KeypadEnter))
+        if(Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Backspace))
         {
             SceneManager.LoadScene(sceneActuelleIndex + 1);
         }
+
+   
     }
 }
