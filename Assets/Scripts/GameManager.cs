@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private float roomTranslationSpeed = 2.5f;
     private float roomRotationSpeed = 5f ;
 
-    public int healthPoint = 5;
+    public int healthPoint = 4;
 
     public GameObject healthBar;
 
