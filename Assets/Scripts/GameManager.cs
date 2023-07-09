@@ -26,18 +26,23 @@ public class GameManager : MonoBehaviour
     public bool blockInput;
     public Animator greySquare;
 
+    public float idleWait = 2f;
+    public bool ennemyDied;
 
 
 
     private void Awake()
     {
+        ennemyDied = false;
         instance = this;
+        StartCoroutine(idleState(idleWait));
     }
 
     private void Start()
     {
         greySquare = GameObject.Find("GreySquare").GetComponent<Animator>();
-       
+        
+
     }
 
     private void FixedUpdate()
@@ -85,6 +90,14 @@ public class GameManager : MonoBehaviour
 
         rbRoom.MoveRotation(rotationMovement);
             
+    }
+
+   IEnumerator idleState (float i)
+    {
+        blockInput = true;
+        yield return new WaitForSeconds(i);
+        blockInput = false;
+
     }
 
 

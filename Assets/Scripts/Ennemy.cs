@@ -72,6 +72,8 @@ public class Ennemy : MonoBehaviour
         StartCoroutine(LoadNewScene());
 
         GameManager.instance.greySquare.SetTrigger("greytransition");
+        GameManager.instance.ennemyDied = true;
+
 
     }
 

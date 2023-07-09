@@ -1183,6 +1183,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1808596400}
     - target: {fileID: 4721348003464619740, guid: 057bd7a7d2b89e04da3949d624a429cc, type: 3}
+      propertyPath: idleWait
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4721348003464619740, guid: 057bd7a7d2b89e04da3949d624a429cc, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 774361620}
@@ -2871,6 +2875,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1808596401}
     m_Modifications:
+    - target: {fileID: 7677360734269802712, guid: 9af1cce3ee4af89499124f61e564e7b8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7677360734269802718, guid: 9af1cce3ee4af89499124f61e564e7b8, type: 3}
       propertyPath: m_RootOrder
       value: 5
