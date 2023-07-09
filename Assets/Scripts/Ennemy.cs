@@ -49,6 +49,7 @@ public class Ennemy : MonoBehaviour
 
     public void Die()
     {
+        GameManager.instance.blockInput = true;
         animator.SetTrigger("die");
         GetComponent<Collider2D>().enabled = false;
         StartCoroutine(LoadNewScene());

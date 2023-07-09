@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     private float maxVerticalRoom = 100;
     private float minVerticalRoom = -100;
 
+    public bool blockInput;
 
     private void Awake()
     {
@@ -40,14 +41,16 @@ public class GameManager : MonoBehaviour
         translationMovement.x = Input.GetAxisRaw("Horizontal");
         translationMovement.y = Input.GetAxisRaw("Vertical");
 
-        ClampedRotationRoom();
+        if(blockInput == false)
+            ClampedRotationRoom();
       
     }
 
     private void FixedUpdate()
     {
 
-        ClampedTranslationRoom();
+        if (blockInput == false)
+            ClampedTranslationRoom();
         
     }
 

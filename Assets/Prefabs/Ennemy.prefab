@@ -152,11 +152,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13d4389f2c4e14248a8ef1d3c5e670ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 10
   currentLife: 0
   spriteRenderer: {fileID: 0}
   fx_hit: {fileID: 4099317107415519473, guid: 8d1c2dfd601fecd4caa55110d4a42c92, type: 3}
   animator: {fileID: 6282015319037431759}
+  postProcess: {fileID: 0}
+  speedTransition: 0
 --- !u!60 &9153213067794306688
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -182,8 +183,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.020224392, y: 0.62714946}
-      - {x: -0.5205027, y: 0.45534927}
-      - {x: -0.50273967, y: -0.5925375}
-      - {x: 0.47954556, y: -0.49976042}
-      - {x: 0.4568596, y: 0.5106475}
+    - - {x: -0.04318116, y: 0.5795952}
+      - {x: -0.5125772, y: 0.36024094}
+      - {x: -0.31318438, y: -0.022548264}
+      - {x: -0.45518532, y: -0.53705776}
+      - {x: 0.0063581914, y: -0.33119166}
+      - {x: 0.5033227, y: -0.46013197}
+      - {x: 0.22133204, y: -0.0056814887}
+      - {x: 0.44893393, y: 0.4551676}
