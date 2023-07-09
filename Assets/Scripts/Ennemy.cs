@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.SceneManagement;
-using UnityEngine.Rendering.PostProcessing;
+
 
 public class Ennemy : MonoBehaviour
 {
-
+  
     private float maxLife = 3;
     public float currentLife;
 
@@ -18,19 +17,37 @@ public class Ennemy : MonoBehaviour
     public Animator animator;
 
     int sceneActuelleIndex;
-    [SerializeField] PostProcessVolume postProcess;
 
-    [SerializeField] float speedTransition;
+    [SerializeField] SpriteRenderer greySquare;
+
+    [SerializeField] int speedTranslation;
+
+    public float startValue = 0f;
+    public float endValue = 1f;
+    public float duration = 0.5f;
+
+    
+
+
+
+    public bool startscene = false;
+
 
     private void Start()
     {
         currentLife = maxLife;
         sceneActuelleIndex = SceneManager.GetActiveScene().buildIndex;
+        startscene = true;
+
       
+
+
+
     }
 
     private void Update()
     {
+        
         
     }
 
@@ -52,7 +69,8 @@ public class Ennemy : MonoBehaviour
         animator.SetTrigger("die");
         GetComponent<Collider2D>().enabled = false;
         StartCoroutine(LoadNewScene());
-        SceneTransition();
+
+        GameManager.instance.greySquare.SetTrigger("greytransition");
 
     }
 
@@ -67,7 +85,7 @@ public class Ennemy : MonoBehaviour
     
     public IEnumerator LoadNewScene()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(sceneActuelleIndex + 1);
     }
     
@@ -86,10 +104,7 @@ public class Ennemy : MonoBehaviour
         spriteRenderer.color = new Color(255, 255, 255);
     }
 
-    private void SceneTransition ()
-    {
-        Debug.Log("coucuo");
-        float t = speedTransition * Time.deltaTime;
-        postProcess.GetComponentInChildren<LensDistortion>().intensity.Interp(-100,100,t) ;
-    }
+    
+
+    
 }

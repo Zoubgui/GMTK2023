@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     private float maxVerticalRoom = 100;
     private float minVerticalRoom = -100;
 
+    public Animator greySquare;
+
 
     private void Awake()
     {
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        greySquare = GameObject.Find("GreySquare").GetComponent<Animator>();
        
     }
 
