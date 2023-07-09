@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Ennemy : MonoBehaviour
 {
@@ -17,11 +18,20 @@ public class Ennemy : MonoBehaviour
     public Animator animator;
 
     int sceneActuelleIndex;
+    [SerializeField] PostProcessVolume postProcess;
+
+    [SerializeField] float speedTransition;
 
     private void Start()
     {
         currentLife = maxLife;
         sceneActuelleIndex = SceneManager.GetActiveScene().buildIndex;
+      
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void TakeDamage(float d, GameObject collision)
@@ -42,7 +52,7 @@ public class Ennemy : MonoBehaviour
         animator.SetTrigger("die");
         GetComponent<Collider2D>().enabled = false;
         StartCoroutine(LoadNewScene());
-
+        SceneTransition();
 
     }
 
@@ -74,5 +84,12 @@ public class Ennemy : MonoBehaviour
         spriteRenderer.color = new Color(0, 255, 255);
         yield return new WaitForSeconds(strob);
         spriteRenderer.color = new Color(255, 255, 255);
+    }
+
+    private void SceneTransition ()
+    {
+        Debug.Log("coucuo");
+        float t = speedTransition * Time.deltaTime;
+        postProcess.GetComponentInChildren<LensDistortion>().intensity.Interp(-100,100,t) ;
     }
 }
