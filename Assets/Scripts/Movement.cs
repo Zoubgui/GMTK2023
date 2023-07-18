@@ -20,7 +20,10 @@ public class Movement : MonoBehaviour
 
     public bool damageTaken = false;
 
-    
+    private Gyroscope gyro;
+    private Quaternion initialRotation;
+
+
 
     void Start()
     {
@@ -33,7 +36,24 @@ public class Movement : MonoBehaviour
         trapSoundEffect = transform.GetChild(2).GetComponent<AudioSource>();
         ennemiSoundEffect = transform.GetChild(3).GetComponent<AudioSource>();
 
-       
+
+        // Vérifier si le gyroscope est disponible sur l'appareil
+        if (SystemInfo.supportsGyroscope)
+        {
+            // Activer le gyroscope
+            gyro = Input.gyro;
+            gyro.enabled = true;
+
+            // Enregistrer la rotation initiale du gyroscope
+            initialRotation = Quaternion.Euler(0f, 0f, gyro.attitude.eulerAngles.z);
+           
+            Debug.Log("la rotation initiale est " + initialRotation.eulerAngles.z);
+        }
+        else
+        {
+            Debug.LogError("Gyroscope not supported on this device.");
+        }
+
 
     }
 
@@ -61,6 +81,27 @@ public class Movement : MonoBehaviour
         {
             sprite.flipX = true;
         }
+
+
+        // Vérifier si le gyroscope est activé
+        if (gyro != null && gyro.enabled)
+        {
+            // Récupérer l'angle d'Euler sur l'axe Z (yaw)
+            float rotationZ = gyro.attitude.eulerAngles.z;
+
+            // Appliquer la rotation horizontale au personnage
+            Quaternion targetRotation = Quaternion.Inverse(initialRotation) * Quaternion.Euler(0f, 0f, rotationZ);
+            //Quaternion playerRotation = Quaternion.Euler(0f, 0f, initialRotationz - targetRotation.z);
+ 
+            transform.rotation = targetRotation;
+
+           
+
+
+        }
+
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -25,7 +25,7 @@ public class CameraFollow : MonoBehaviour
         float c = Mathf.Cos(b * 2 *Mathf.PI);
         float d = c * 3.15f;
 
-        Debug.Log(d);
+    
 
 
 

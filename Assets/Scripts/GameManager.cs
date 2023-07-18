@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     public float idleWait = 2f;
     public bool ennemyDied;
 
+    
+
 
 
     private void Awake()
@@ -42,21 +44,24 @@ public class GameManager : MonoBehaviour
     {
         greySquare = GameObject.Find("GreySquare").GetComponent<Animator>();
 
-   
+       
+
 
     }
 
     private void FixedUpdate()
     {
 
-        translationMovement.x = Input.GetAxisRaw("Horizontal");
-        translationMovement.y = Input.GetAxisRaw("Vertical");
+        //translationMovement.x = Input.GetAxisRaw("Horizontal");
+        //translationMovement.y = Input.GetAxisRaw("Vertical");
 
-        if (blockInput == false)
-            ClampedTranslationRoom();
+        //if (blockInput == false)
+        //    ClampedTranslationRoom();
 
         if (blockInput == false)
             ClampedRotationRoom();
+
+        
     }
 
     private void ClampedTranslationRoom()

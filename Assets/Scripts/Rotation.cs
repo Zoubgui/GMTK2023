@@ -6,7 +6,6 @@ public class Rotation : MonoBehaviour
 {
     [SerializeField] float rotationSpeed;
 
-    private float rotationMovement = 1;
     Vector3 rotation;
 
     // Start is called before the first frame update
