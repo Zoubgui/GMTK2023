@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
-    private float speed =75f;
+    private float speed =2f;
     [SerializeField] Rigidbody2D rb;
     private float maxVelocity =4f;
     
@@ -21,7 +21,16 @@ public class Movement : MonoBehaviour
     public bool damageTaken = false;
 
     private Gyroscope gyro;
-    private Quaternion initialRotation;
+    private float initialRotation;
+
+    Ray directionRay;
+    [SerializeField] Transform rayDirection;
+
+
+    public bool touch = false;
+    public bool idle = true;
+
+    float rotationZ;
 
 
 
@@ -32,7 +41,6 @@ public class Movement : MonoBehaviour
         StartCoroutine(WaitidleState(GameManager.instance.idleWait));
      
         wallSoundEffect = transform.GetChild(1).GetComponent<AudioSource>();
-        Debug.Log(wallSoundEffect);
         trapSoundEffect = transform.GetChild(2).GetComponent<AudioSource>();
         ennemiSoundEffect = transform.GetChild(3).GetComponent<AudioSource>();
 
@@ -45,9 +53,9 @@ public class Movement : MonoBehaviour
             gyro.enabled = true;
 
             // Enregistrer la rotation initiale du gyroscope
-            initialRotation = Quaternion.Euler(0f, 0f, gyro.attitude.eulerAngles.z);
-           
-            Debug.Log("la rotation initiale est " + initialRotation.eulerAngles.z);
+            initialRotation = gyro.attitude.eulerAngles.z;
+
+            Debug.Log("la rotation initiale est " + initialRotation);
         }
         else
         {
@@ -60,6 +68,8 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         if (rb.velocity.magnitude > maxVelocity)
         {
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
@@ -68,7 +78,7 @@ public class Movement : MonoBehaviour
 
         
 
-        //Debug.Log(rb.velocity);
+        Debug.Log(rb.velocity);
 
         Vector2 v2 = rb.velocity.normalized;
         float f = Vector2.Angle(Vector2.right, v2);
@@ -87,19 +97,38 @@ public class Movement : MonoBehaviour
         if (gyro != null && gyro.enabled)
         {
             // Récupérer l'angle d'Euler sur l'axe Z (yaw)
-            float rotationZ = gyro.attitude.eulerAngles.z;
+            rotationZ = gyro.attitude.eulerAngles.z - initialRotation;
+            
 
             // Appliquer la rotation horizontale au personnage
-            Quaternion targetRotation = Quaternion.Inverse(initialRotation) * Quaternion.Euler(0f, 0f, rotationZ);
-            //Quaternion playerRotation = Quaternion.Euler(0f, 0f, initialRotationz - targetRotation.z);
- 
-            transform.rotation = targetRotation;
-
-           
-
-
+            
         }
 
+        //Direction de la sphère 
+
+        float rotationZgradian = rotationZ * Mathf.Deg2Rad;
+        float movementX = Mathf.Cos(rotationZgradian);
+        float movementY = Mathf.Sin(rotationZgradian);
+
+        Vector3 movement = new Vector3(movementX * speed * Time.deltaTime, -movementY * speed * Time.deltaTime, 0f);
+       
+        directionRay = new Ray(transform.position, movement);
+        Debug.DrawRay(directionRay.origin, directionRay.direction * 10f, Color.red);
+
+        if (touch == false && idle == false)
+        {
+            transform.Translate(movement);
+            sprite.flipX = false;
+        }
+        else if(touch == true && idle == false)
+        {
+            transform.Translate(-movement);
+            sprite.flipX = true;
+        }
+
+      
+        Quaternion targetRotation = Quaternion.Euler(0f, 0f, rotationZ);
+        sprite.transform.rotation = Quaternion.Inverse(targetRotation);
 
 
     }
@@ -109,6 +138,7 @@ public class Movement : MonoBehaviour
         if (collision.CompareTag("Pico"))
         {
             PlayerTakeDammage();
+            touch = !touch;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -120,17 +150,21 @@ public class Movement : MonoBehaviour
 
             StartCoroutine(BoostVelocity(3));
             rb.AddForce(rb.velocity*50);
+            touch = !touch;
+           
         }
 
         if (collision.collider.tag == "Bord")
         {
             //wallSoundEffect.Play();
+            touch = !touch;
         }
 
         if (collision.collider.tag == "Ennemy")
         {
             ennemiSoundEffect.Play();
             //collision.gameObject.GetComponent<Ennemy>().TakeDamage(1, this.gameObject);
+            touch = !touch;
         }
     }
 
@@ -199,7 +233,8 @@ public class Movement : MonoBehaviour
     IEnumerator WaitidleState(float i)
     {
         yield return new WaitForSeconds(i);
-        rb.AddForce(GameManager.instance.currentRoom.GetComponent<Room>().pulse * speed);
+        idle = false;
+        //rb.AddForce(GameManager.instance.currentRoom.GetComponent<Room>().pulse * speed);
         animator.SetTrigger("start");
 
     }
